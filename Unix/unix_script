@@ -1,3 +1,9 @@
+#aquiring run fastq files
+fasterq-dump --gzip --split-files SRR8238941
+fasterq-dump --gzip --split-files SRR8238942
+fasterq-dump --gzip --split-files SRR8238945
+fasterq-dump --gzip --split-files SRR8238946
+
 ### GRCm39 ###
 
 # importing files
@@ -9,8 +15,13 @@ gunzip GCF_000001635.27_GRCm39_genomic.fna.gz
 gunzip GCF_000001635.27_GRCm39_genomic.gtf.gz
 
 ## Indexing Genome
-STAR --runMode genomeGenerate --genomeDir indexed_GRCm39/ --genomeFastaFiles GCF_000001635.27_GRCm39_genomic.fna --sjdbGTFfile GCF_000001635.27_GRCm39_genomic.gtf --runThreadN 8
 
+STAR \
+  --runMode genomeGenerate \
+  --genomeDir indexed_GRCm39/ \
+  --genomeFastaFiles GCF_000001635.27_GRCm39_genomic.fna \
+  --sjdbGTFfile GCF_000001635.27_GRCm39_genomic.gtf \
+  --runThreadN 8
 
 ### GRCm38 (Old reference) ###
 
@@ -23,5 +34,16 @@ gunzip GCF_000001635.20_GRCm38_genomic.fna.gz
 gunzip GCF_000001635.20_GRCm38_genomic.gtf.gz
 
 ## Indexing Genome
-STAR --runMode genomeGenerate --genomeDir indexed_GRCm38/ --genomeFastaFiles GCF_000001635.20_GRCm38_genomic.fna --sjdbGTFfile GCF_000001635.20_GRCm38_genomic.gtf --runThreadN 8
+
+STAR \
+  --runMode genomeGenerate \
+  --genomeDir indexed_GRCm38/ \
+  --genomeFastaFiles GCF_000001635.20_GRCm38_genomic.fna \
+  --sjdbGTFfile GCF_000001635.20_GRCm38_genomic.gtf \
+  --runThreadN 8
+
+
+
+
+
 
