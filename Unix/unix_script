@@ -23,6 +23,48 @@ STAR \
   --sjdbGTFfile GCF_000001635.27_GRCm39_genomic.gtf \
   --runThreadN 8
 
+## Alignment
+
+# aligning control rep 1
+STAR \
+    --genomeDir indexed_GRCm39/ \
+    --readFilesIn ../run_fastq/SRR8238941_1.fastq.gz ../run_fastq/SRR8238941_2.fastq.gz \
+    --readFilesCommand zcat \
+    --outFileNamePrefix control_rep1/control_rep1_ \
+    --outSAMtype BAM SortedByCoordinate \
+    --runThreadN 16 \
+    --quantMode GeneCounts &
+
+# aligning control rep 2
+STAR \
+    --genomeDir indexed_GRCm39/ \
+    --readFilesIn ../run_fastq/SRR8238942_1.fastq.gz ../run_fastq/SRR8238942_2.fastq.gz \
+    --readFilesCommand zcat \
+    --outFileNamePrefix control_rep2/control_rep2_ \
+    --outSAMtype BAM SortedByCoordinate \
+    --runThreadN 16 \
+    --quantMode GeneCounts &
+
+# aligning infected rep 1
+STAR \
+    --genomeDir indexed_GRCm39/ \
+    --readFilesIn ../run_fastq/SRR8238945_1.fastq.gz ../run_fastq/SRR8238945_2.fastq.gz \
+    --readFilesCommand zcat \
+    --outFileNamePrefix infect_rep1/infect_rep1_ \
+    --outSAMtype BAM SortedByCoordinate \
+    --runThreadN 16 \
+    --quantMode GeneCounts &
+
+# aligning infected rep 2
+STAR \
+    --genomeDir indexed_GRCm39/ \
+    --readFilesIn ../run_fastq/SRR8238946_1.fastq.gz ../run_fastq/SRR8238946_2.fastq.gz \
+    --readFilesCommand zcat \
+    --outFileNamePrefix infect_rep2/infect_rep2_ \
+    --outSAMtype BAM SortedByCoordinate \
+    --runThreadN 16 \
+    --quantMode GeneCounts &
+
 ### GRCm38 (Old reference) ###
 
 # importing files
@@ -41,6 +83,9 @@ STAR \
   --genomeFastaFiles GCF_000001635.20_GRCm38_genomic.fna \
   --sjdbGTFfile GCF_000001635.20_GRCm38_genomic.gtf \
   --runThreadN 8
+
+
+
 
 
 
