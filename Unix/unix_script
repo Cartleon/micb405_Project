@@ -1,0 +1,13 @@
+### GRCm39 ###
+
+# importing files
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/635/GCF_000001635.27_GRCm39/GCF_000001635.27_GRCm39_genomic.fna.gz
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/635/GCF_000001635.27_GRCm39/GCF_000001635.27_GRCm39_genomic.gtf.gz
+
+# decompressing
+gunzip GCF_000001635.27_GRCm39_genomic.fna.gz
+gunzip GCF_000001635.27_GRCm39_genomic.gtf.gz
+
+## Indexing Genome
+STAR --runMode genomeGenerate --genomeDir indexed_GRCm39/ --genomeFastaFiles GCF_000001635.27_GRCm39_genomic.fna --sjdbGTFfile GCF_000001635.27_GRCm39_genomic.gtf --runThreadN 8
+
