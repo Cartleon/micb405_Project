@@ -35,6 +35,10 @@ STAR \
     --runThreadN 16 \
     --quantMode GeneCounts &
 
+#featureCounts control rep 1
+featureCounts -p --countReadPairs -a ../GCF_000001635.27_GRCm39_genomic.gtf.gz -t exon -g gene_id -o control_rep1_counts.tsv control_rep1_Aligned.sortedByCoord.out.bam
+
+
 # aligning control rep 2
 STAR \
     --genomeDir indexed_GRCm39/ \
@@ -44,6 +48,9 @@ STAR \
     --outSAMtype BAM SortedByCoordinate \
     --runThreadN 16 \
     --quantMode GeneCounts &
+
+#featureCounts control rep 2
+featureCounts -p --countReadPairs -a ../GCF_000001635.27_GRCm39_genomic.gtf.gz -t exon -g gene_id -o control_rep2_counts.tsv control_rep2_Aligned.sortedByCoord.out.bam
 
 # aligning infected rep 1
 STAR \
