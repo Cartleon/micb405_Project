@@ -38,3 +38,20 @@ data_mapped <- data_mapped %>%
 # Save or use your data
 write.csv(data_mapped, "entrez_results.csv", row.names = FALSE)
 view(data_mapped)
+
+## Entrez Results Unfiltered
+# For GO term Volcano
+
+# Load your gene list CSV (adjust your filename)
+data_unfiltered <- read.csv("res_no_NA_results_geneid.csv", stringsAsFactors = FALSE)
+
+# Join your gene list with the GTF mapping to get Entrez IDs
+data_mapped_unfilered <- data_unfiltered %>%
+  left_join(gtf_genes, by = c("gene_id" = "gene_name"))
+
+# Replace gene_id with entrez where available, keep original where not
+data_mapped_unfilered$gene_id <- ifelse(!is.na(data_mapped_unfilered$entrez), data_mapped_unfilered$entrez, data_mapped_unfilered$gene_id)
+
+# Drop the extra 'entrez' column if desired
+data_mapped_unfilered <- data_mapped_unfilered %>%
+  select(-entrez)
