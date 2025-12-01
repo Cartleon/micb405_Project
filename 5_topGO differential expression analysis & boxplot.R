@@ -4,11 +4,7 @@ suppressPackageStartupMessages(library(topGO))
 suppressPackageStartupMessages(library(DESeq2))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(purrr))
-go_terms <- c(
-  "GO:0006954", "GO:0050729", "GO:0071222", "GO:0032760", "GO:0043123", 
-  "GO:0032729", "GO:0032728", "GO:0071346", "GO:0035458", "GO:0045071", 
-  "GO:0140374", "GO:0045087"
-)
+go_terms <- c("GO:0006954", "GO:0050729", "GO:0043123", "GO:0032729", "GO:0032728", "GO:0071346", "GO:0035458", "GO:0045087")
 
 geneID2GO <- readMappings("geneID2GO.tsv")
 joined_GO_filtered_arranged <- read.table("joined_GO_filtered_arranged.tsv", header=TRUE, sep="\t", stringsAsFactors=FALSE)

@@ -70,7 +70,7 @@ go_stats_table <- go_stats[, c("GO", "Term", "gene_name", "log2FoldChange", "lfc
 # --- View or export result ---
 View(go_stats_table)
 
-# Pick the GO ID you want (from list: "GO:0006954", "GO:0050729", "GO:0071222", "GO:0032760", "GO:0043123", GO:0032729, "GO:0032728", "GO:0071346", "GO:0035458", "GO:0045071", "GO:0140374", "GO:0045087")
+# Pick the GO ID you want (from list: "GO:0006954", "GO:0050729", "GO:0043123", "GO:0032729", "GO:0032728", "GO:0071346", "GO:0035458", "GO:0045087")
 go_id <- "GO:0045087"    # <----- Change this to the desired GO ID
 
 # Create the sub_table for this GO term only
@@ -80,6 +80,25 @@ sub_table <- go_stats_table %>%
 
 # You can print or View(sub_table) to inspect
 view(sub_table)
+
+# Get the GO term name from this sub_table
+term_name  <- unique(sub_table$Term)[1]
+
+# Make term name safe for filenames
+safe_term  <- gsub("[^A-Za-z0-9_]", "_", term_name)
+
+# Build filename in your existing directory (e.g. GO_sub_tables)
+filename_table <- paste0("GO_sub_tables/", safe_term, "_sub_table.tsv")
+
+# Save this GO-specific table
+write.table(
+  sub_table,
+  file      = filename_table,
+  sep       = "\t",
+  row.names = FALSE,
+  quote     = FALSE
+)
+
   
 ## Plot
 
@@ -112,7 +131,7 @@ p <- ggplot(sub_table, aes(
 
 p
 
-ggsave(filename, plot = p, width = 9, height = 6, dpi = 300)
+#ggsave(filename, plot = p, width = 9, height = 6, dpi = 300)
 
 
 ## For GO:0045087 and GO:0006954, that have too many genes to be shown in one panel (change N_panels for number of panels)
