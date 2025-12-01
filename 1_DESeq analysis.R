@@ -10,17 +10,17 @@ ctrl_rep1 <- read_tsv("aligned_ctrl_rep1_ReadsPerGene.out.tab",
                       skip = 4)
 # Control replicate 2
 ctrl_rep2 <- read_tsv("aligned_ctrl_rep2_ReadsPerGene.out.tab",
-                           col_names = c("gene_id", "total","antisense", "sense"),
-                           skip = 4)
+                      col_names = c("gene_id", "total","antisense", "sense"),
+                      skip = 4)
 # Treatment replicate 1
 sample_rep1 <- read_tsv("aligned_sample_rep1_ReadsPerGene.out.tab",
-                            col_names = c("gene_id", "total","antisense", "sense"),
-                            skip = 4)
+                        col_names = c("gene_id", "total","antisense", "sense"),
+                        skip = 4)
 
 # Treatment replicate 2
 sample_rep2 <- read_tsv("aligned_sample_rep2_ReadsPerGene.out.tab",
-                            col_names = c("gene_id", "total","antisense", "sense"),
-                            skip = 4)
+                        col_names = c("gene_id", "total","antisense", "sense"),
+                        skip = 4)
 
 # Note the column names assigned - these will be important when we set our metadata file 
 dat <- data.frame(row.names = ctrl_rep1$gene_id,
@@ -62,6 +62,9 @@ dds <- DESeq(dds_matrix)
 
 saveRDS(dds, "dds.rds")
 
+# log transformation
+rld <- rlog(dds)
+
 ## Sanity checks
 
 # Calculate distances between samples in our log-transformed data
@@ -101,6 +104,10 @@ res_no_NA <- res %>%
 view(res_no_NA) 
 write_csv(res_no_NA, "res_no_NA_results.csv") #no gene_id
 
+res_no_NA_geneid <- res_no_NA %>% 
+  rownames_to_column("gene_id")
+write_csv(res_no_NA_geneid, "res_no_NA_results_geneid.csv") 
+
 # Results with an adjusted p-value < 0.05 for diferentially expressed genes
 res_filtered <- res_no_NA %>% 
   filter(padj <= 0.05)
@@ -115,3 +122,5 @@ res_filtered_final <- res_filtered %>%
 
 head(res_filtered_final)
 write_csv(res_filtered_final, "filtered_results.csv")
+
+
