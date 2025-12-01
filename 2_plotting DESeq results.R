@@ -4,6 +4,7 @@ suppressPackageStartupMessages(library(pheatmap))
 suppressPackageStartupMessages(library(RColorBrewer))
 
 # Perform log transformation on our count data
+dds <- readRDS("dds.rds")
 rld <- rlog(dds)
 
 # Generate a PCA plot with DESeq2's plotPCA function
@@ -198,3 +199,4 @@ Z_topGenes <- Z[topVarGenes,]
 
 pheatmap(Z_topGenes,
          main = "Top 20 Genes")
+
